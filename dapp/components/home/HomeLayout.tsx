@@ -1,13 +1,14 @@
 import { Box, Text } from '@chakra-ui/react';
+import Header from '@components/common/Header';
 import Head from 'next/head';
 import { FC, ReactNode } from 'react';
-import Header from './Header';
+import HeaderLink from './HeaderLink';
 
-interface LayoutProps {
+interface HomeLayoutProps {
   children: ReactNode;
 }
 
-const Layout: FC<LayoutProps> = ({ children }) => {
+const HomeLayout: FC<HomeLayoutProps> = ({ children }) => {
   return (
     <Box>
       <Head>
@@ -15,7 +16,9 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <meta name="description" content="UnderTheMovie NFT" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header />
+      <Header>
+        <HeaderLink />
+      </Header>
       {children}
       <footer>
         <Box textAlign="center" my={2}>
@@ -29,4 +32,4 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   );
 };
 
-export default Layout;
+export default HomeLayout;

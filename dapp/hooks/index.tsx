@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-import Web3 from "web3";
-import { MINT_NFT_ABI, MINT_NFT_CONTRACT } from "../web3.config";
+import { useEffect, useRef, useState } from 'react';
+import Web3 from 'web3';
+import { MINT_NFT_ABI, MINT_NFT_CONTRACT } from '../web3.config';
 
 export const useObserve = () => {
   const [isObserved, setIsObserved] = useState<boolean>(false);
@@ -12,8 +12,8 @@ export const useObserve = () => {
     if (dom.current) {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) setIsObserved(true);
-        else setIsObserved(false);
       });
+
       observer.current.observe(dom.current);
 
       return () => observer.current && observer.current.disconnect;
@@ -28,25 +28,27 @@ export const useObserve = () => {
 };
 
 export const useWallet = () => {
-  const [account, setAccount] = useState<string>("");
+  const [account, setAccount] = useState<string>('');
+  const [isPending, setIsPending] = useState<boolean>(true);
 
   const getAccount = async () => {
     try {
       if (window.ethereum) {
         const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
+          method: 'eth_requestAccounts',
         });
 
         setAccount(accounts[0]);
+        setIsPending(false);
       } else {
-        alert("Install MetaMask!!!");
+        alert('Install MetaMask!!!');
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  return { account, getAccount };
+  return { account, getAccount, isPending };
 };
 
 export const useWeb3 = () => {
@@ -58,6 +60,7 @@ export const useWeb3 = () => {
 
     setWeb3(new Web3(window.ethereum));
   }, []);
+
   useEffect(() => {
     if (!web3) return;
 
