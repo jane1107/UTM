@@ -10,15 +10,15 @@ const height = 512;
 const StoryContents = [
   {
     image: 'images/team1.png',
-    contents: '우리 NFT의 세계관을 여기에 적습니다.',
+    contents: '영화를 좋아하는 바닷속 친구들',
   },
   {
     image: 'images/team2.png',
-    contents: '잘 갖추어진 세계관은 NFT 홀더들에게 몰입감을 부여할 수 있습니다.',
+    contents: '영화를 위해서 UTM을 만들었습니다',
   },
   {
     image: 'images/team3.png',
-    contents: '여러분의 상상의 나래를 펼쳐서 멋진 세계관을 창조해보세요.',
+    contents: '함께 영화를 즐겨요',
   },
 ];
 
