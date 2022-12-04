@@ -37,7 +37,7 @@ const Header: FC<Props> = ({ children }) => {
       <Box>
         <Link href="/">
           <Text fontWeight="bold" fontSize="xl" cursor="pointer">
-            UnderTheMovie NFT
+            UnderTheMovie NFT test
           </Text>
         </Link>
       </Box>
