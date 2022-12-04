@@ -9,18 +9,31 @@
  contract MintNFT is ERC721Enumerable, Ownable {
     string public metadataURI;
     uint public totalNFT;
+    mapping(address => uint) whitelist;
 
     constructor(string memory _name, string memory _symbol ,string memory _metadataURI, uint _totalNFT) ERC721(_name, _symbol) {
         metadataURI = _metadataURI;
         totalNFT = _totalNFT;
     }
 
-    function mintNFT() public onlyOwner {
+    function isOwner() private view returns (bool) {
+        return msg.sender == owner();
+    }
+
+    function mintNFT() public payable {
         require(totalNFT > totalSupply(), "No more mint.");
+        require(whitelist[msg.sender]>0 || isOwner(), "Not in Whitelist.");
+        require(msg.value >= 0.1 ether, "Not Enough BNB");
 
         uint tokenId = totalSupply() + 1;
 
         _mint(msg.sender, tokenId);
+
+        if(!isOwner()){
+            whitelist[msg.sender]--;
+        }
+
+        payable(owner()).transfer(msg.value);
     }
 
     function batchMint(uint _amount) public onlyOwner {
@@ -43,4 +56,9 @@
  
         return myNFTs;
     }
+
+    function setWhitelist(address _whitelist, uint _amount) public onlyOwner{
+        whitelist[_whitelist] = _amount;
+    }
+
  }
